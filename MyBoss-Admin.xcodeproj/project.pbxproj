@@ -13,9 +13,12 @@
 		2D5661512499E49C00CD683A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D56614F2499E49C00CD683A /* Main.storyboard */; };
 		2D5661532499E49F00CD683A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661522499E49F00CD683A /* Assets.xcassets */; };
 		2D5661562499E49F00CD683A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661542499E49F00CD683A /* LaunchScreen.storyboard */; };
+		FD5DC93804977AFD8F7E0299 /* Pods_MyBoss_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2394F09BACAC26AA8A06B8F0 /* Pods_MyBoss_Admin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0494B1CEF5BD5FF0E2E1FD10 /* Pods-MyBoss-Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBoss-Admin.debug.xcconfig"; path = "Target Support Files/Pods-MyBoss-Admin/Pods-MyBoss-Admin.debug.xcconfig"; sourceTree = "<group>"; };
+		2394F09BACAC26AA8A06B8F0 /* Pods_MyBoss_Admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyBoss_Admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D5661462499E49C00CD683A /* MyBoss-Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyBoss-Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D5661492499E49C00CD683A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D56614B2499E49C00CD683A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		2D5661522499E49F00CD683A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D5661552499E49F00CD683A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D5661572499E49F00CD683A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60B9223DFA753F73F5AB44A1 /* Pods-MyBoss-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBoss-Admin.release.xcconfig"; path = "Target Support Files/Pods-MyBoss-Admin/Pods-MyBoss-Admin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD5DC93804977AFD8F7E0299 /* Pods_MyBoss_Admin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				2D5661482499E49C00CD683A /* MyBoss-Admin */,
 				2D5661472499E49C00CD683A /* Products */,
+				8B117FAF79A456399287688E /* Pods */,
+				64610205936292DE8E2F6FAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = "MyBoss-Admin";
 			sourceTree = "<group>";
 		};
+		64610205936292DE8E2F6FAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2394F09BACAC26AA8A06B8F0 /* Pods_MyBoss_Admin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B117FAF79A456399287688E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0494B1CEF5BD5FF0E2E1FD10 /* Pods-MyBoss-Admin.debug.xcconfig */,
+				60B9223DFA753F73F5AB44A1 /* Pods-MyBoss-Admin.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D56615A2499E49F00CD683A /* Build configuration list for PBXNativeTarget "MyBoss-Admin" */;
 			buildPhases = (
+				6A77DF92103230142B11404A /* [CP] Check Pods Manifest.lock */,
 				2D5661422499E49C00CD683A /* Sources */,
 				2D5661432499E49C00CD683A /* Frameworks */,
 				2D5661442499E49C00CD683A /* Resources */,
@@ -132,6 +158,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A77DF92103230142B11404A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyBoss-Admin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D5661422499E49C00CD683A /* Sources */ = {
@@ -282,6 +333,7 @@
 		};
 		2D56615B2499E49F00CD683A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0494B1CEF5BD5FF0E2E1FD10 /* Pods-MyBoss-Admin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +351,7 @@
 		};
 		2D56615C2499E49F00CD683A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60B9223DFA753F73F5AB44A1 /* Pods-MyBoss-Admin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
