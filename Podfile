@@ -6,5 +6,13 @@ target 'MyBoss-Admin' do
   use_frameworks!
 
   # Pods for MyBoss-Admin
+	pod 'Firebase/Auth'
+	pod 'Firebase/Core'
+	pod 'Firebase/Storage'
+	pod 'Firebase/Firestore'
+	pod "ParticlesLoadingView"
+	pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
+
+
 
 end
