@@ -16,10 +16,10 @@
 		2D5661562499E49F00CD683A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661542499E49F00CD683A /* LaunchScreen.storyboard */; };
 		2D9A0A0524A22C0100AF939F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */; };
 		2D9A0A0724A22DFB00AF939F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */; };
-		2D9A0A0924A2347500AF939F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0824A2347500AF939F /* Utilities.swift */; };
 		2D9A0A0B24A2348F00AF939F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */; };
 		2D9A0A0D24A23D5700AF939F /* ListUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0C24A23D5700AF939F /* ListUserTableViewController.swift */; };
 		2D9A0A0F24A25E4500AF939F /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0E24A25E4500AF939F /* InformationViewController.swift */; };
+		BA325EDA24B4BA8600B275B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA325ED924B4BA8600B275B6 /* Utilities.swift */; };
 		FD5DC93804977AFD8F7E0299 /* Pods_MyBoss_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2394F09BACAC26AA8A06B8F0 /* Pods_MyBoss_Admin.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,11 +38,11 @@
 		2D5661572499E49F00CD683A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2D9A0A0824A2347500AF939F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../../Deadline/ios/1712061_QLyCLB/1712061_QLCLB/ClubManager/ClubManager/Utilities.swift; sourceTree = "<group>"; };
 		2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2D9A0A0C24A23D5700AF939F /* ListUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserTableViewController.swift; sourceTree = "<group>"; };
 		2D9A0A0E24A25E4500AF939F /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		60B9223DFA753F73F5AB44A1 /* Pods-MyBoss-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBoss-Admin.release.xcconfig"; path = "Target Support Files/Pods-MyBoss-Admin/Pods-MyBoss-Admin.release.xcconfig"; sourceTree = "<group>"; };
+		BA325ED924B4BA8600B275B6 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,12 +87,12 @@
 				2D9A0A0E24A25E4500AF939F /* InformationViewController.swift */,
 				2D9A0A0C24A23D5700AF939F /* ListUserTableViewController.swift */,
 				2D12D96A24ACCA6E007CDB76 /* ScanQRViewController.swift */,
-				2D9A0A0824A2347500AF939F /* Utilities.swift */,
 				2D5661522499E49F00CD683A /* Assets.xcassets */,
 				2D5661542499E49F00CD683A /* LaunchScreen.storyboard */,
 				2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */,
 				2D5661572499E49F00CD683A /* Info.plist */,
 				2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */,
+				BA325ED924B4BA8600B275B6 /* Utilities.swift */,
 			);
 			path = "MyBoss-Admin";
 			sourceTree = "<group>";
@@ -235,9 +235,9 @@
 				2D12D96B24ACCA6E007CDB76 /* ScanQRViewController.swift in Sources */,
 				2D56614A2499E49C00CD683A /* AppDelegate.swift in Sources */,
 				2D9A0A0F24A25E4500AF939F /* InformationViewController.swift in Sources */,
-				2D9A0A0924A2347500AF939F /* Utilities.swift in Sources */,
 				2D56614C2499E49C00CD683A /* SceneDelegate.swift in Sources */,
 				2D9A0A0D24A23D5700AF939F /* ListUserTableViewController.swift in Sources */,
+				BA325EDA24B4BA8600B275B6 /* Utilities.swift in Sources */,
 				2D9A0A0B24A2348F00AF939F /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
