@@ -498,6 +498,9 @@
                                 <rect key="frame" x="139" y="655" width="150" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createTapped:" destination="fEh-wZ-qqg" eventType="touchUpInside" id="FIg-Sf-QxL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxx-Sl-NaF">
                                 <rect key="frame" x="40" y="194" width="335" height="43"/>
@@ -518,8 +521,12 @@
                         <viewLayoutGuide key="safeArea" id="bQj-6u-thX"/>
                     </view>
                     <connections>
-                        <outlet property="errorMess" destination="hEf-bv-mUb" id="VEN-bk-wZc"/>
-                        <outlet property="signUpButton" destination="zvE-wq-feH" id="Dy9-Pu-zo7"/>
+                        <outlet property="createButton" destination="zvE-wq-feH" id="otj-Wy-h7c"/>
+                        <outlet property="emailText" destination="ihB-vt-HAn" id="tHL-bB-H91"/>
+                        <outlet property="errorMess" destination="hEf-bv-mUb" id="RmG-7v-RWf"/>
+                        <outlet property="firstNameText" destination="MoF-DT-EU2" id="E4i-3s-WtV"/>
+                        <outlet property="lastNameText" destination="bKL-h7-uIT" id="Xxx-1M-dJB"/>
+                        <outlet property="phoneNumberText" destination="EJh-iB-xQF" id="VUF-c7-scP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TnA-In-bEL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

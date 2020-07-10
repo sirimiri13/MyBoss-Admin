@@ -8,9 +8,12 @@
 
 import UIKit
 import SwiftQRScanner
+import Firebase
+import FirebaseAuth
 
-
-class ScanQRViewController: UIViewController {  
+class ScanQRViewController: UIViewController {
+    let db = Firestore.firestore()
+    let auth = Auth.auth().currentUser?.email
     var qrCodeFrameView: UIView?
     var  afterSuccessfullySelected: ((_ item: String?) -> Void)?
     override func viewDidLoad() {
@@ -29,25 +32,59 @@ class ScanQRViewController: UIViewController {
     
     }
     extension ScanQRViewController: QRScannerCodeDelegate {
-        func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
-            print("result:\(result)")
-            if let afterSuccessfullySelected = self.afterSuccessfullySelected {
-                afterSuccessfullySelected("done")
+           // let date = Calendar.current.
+            func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
+                let today = Date()
+                let formatter3 = DateFormatter()
+                formatter3.dateFormat = "yyyy/MM/dd"
+                let formatterMMYY = DateFormatter()
+                formatterMMYY.dateFormat = "MM y"
+                let month = formatterMMYY.string(from: today)
+                let timeCheck = formatter3.string(from: today)
+                db.collection("attendance").document(result).getDocument { (snap, err) in
+                self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
+                 //   self.db.collection("attendance/\(result)'").addDocument(data: [month :[""]])
+                    let temp = snap?.data()!["Start"] as! String
+                    if (temp == ""){
+                        self.db.collection("attendance").document(result).updateData(["Start" : timeCheck])
+                    }
+                    else{
+                        self.db.collection("attendance").document(result).updateData(["End" : timeCheck])
+                        let start = snap?.data()!["Start"] as! String
+                        let end = snap?.data()!["Start"] as! String
+                        if (start == end){
+                          //  self.db.collection("days").document(result).updateData([month : FieldValue.arrayUnion([timeCheck])])
+                            self.db.collection("attendance").document(result).collection("days").document(month).updateData(["date" : FieldValue.arrayUnion([timeCheck])])
+                            self.db.collection("attendance").document(result).updateData(["End" : "", "Start": ""])
+                            
+                        }
+                        else {
+                            self.db.collection("attendance").document(result).updateData(["Start" : timeCheck])
+                            self.db.collection("attendance").document(result).updateData(["End" : ""])
+                        }
+                    
+                    }
+                }
+                print("result:\(result)")
+                if let afterSuccessfullySelected = self.afterSuccessfullySelected {
+                    afterSuccessfullySelected("done")
+                    let alert = UIAlertController(title: "Scanner", message: "We got ID", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert,animated: true)
+                }
+    //            let alert = UIAlertController(title: "Scanner", message: "We got ID", preferredStyle: .alert)
+    //            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    //            alert.addAction(okAction)
+    //            present(alert,animated: true)
             }
-            let alert = UIAlertController(title: "Scanner", message: "We got ID", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            alert.view.alignmentRect(forFrame: CGRect(x: 50, y: 50, width: 80, height: 50))
-            show(alert, sender: self)
-     
+
+            func qrScannerDidFail(_ controller: UIViewController, error: String) {
+                print("error:\(error)")
+
+            }
+
+            func qrScannerDidCancel(_ controller: UIViewController) {
+                print("SwiftQRScanner did cancel")
+            }
         }
-        
-        func qrScannerDidFail(_ controller: UIViewController, error: String) {
-            print("error:\(error)")
-      
-        }
-        
-        func qrScannerDidCancel(_ controller: UIViewController) {
-            print("SwiftQRScanner did cancel")
-        }
-    }

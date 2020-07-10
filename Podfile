@@ -12,7 +12,7 @@ target 'MyBoss-Admin' do
 	pod 'Firebase/Firestore'
 	pod "ParticlesLoadingView"
 	pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
-
+	pod 'JGProgressHUD', '~> 2.1'
 
 
 end

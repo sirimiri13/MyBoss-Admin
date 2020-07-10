@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -194,29 +195,34 @@ class LoginViewController: UIViewController {
             }
             
             @objc private func signInButtonTapped(button: UIButton) {
+                let hud = JGProgressHUD(style: .dark)
                 let username = textFieldView1.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
                 let pass = textFieldView2.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
                 let db = Firestore.firestore()
-                db.collection("admin").getDocuments {(snap, err) in
-                    for admin in snap!.documents{
-                        if (admin.data()["Email"] as! String == username) {
-                            Auth.auth().signIn(withEmail: username!, password: pass!) { (res, err) in
-                                if (err != nil){
-                                    self.showAlertVC(title: err!.localizedDescription)
-                                }
-                                else {
-                                    if let tabbar = (self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController) {
-                                    let navController = UINavigationController(rootViewController: tabbar)
-                                        navController.modalPresentationStyle = .fullScreen
-                                        self.present(navController, animated: true, completion: nil)
+                hud.show(in: self.view)
+                DispatchQueue.global(qos: .background).async {
+                    db.collection("admin").getDocuments {(snap, err) in
+                        for admin in snap!.documents{
+                            if ((admin.data()["Email"] as! String) == username) {
+                                Auth.auth().signIn(withEmail: username!, password: pass!) { (res, err) in
+                                    hud.dismiss(animated: true)
+                                    DispatchQueue.main.async {
+                                        if (err != nil){
+                                            self.showAlertVC(title: err!.localizedDescription)
+                                        }
+                                        else {
+                                            if let tabbar = (self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController) {
+                                                let navController = UINavigationController(rootViewController: tabbar)
+                                                navController.modalPresentationStyle = .fullScreen
+                                                self.present(navController, animated: true, completion: nil)
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                        
                     }
                 }
-                
             }
             
             @objc private func signUpButtonTapped(button: UIButton) {

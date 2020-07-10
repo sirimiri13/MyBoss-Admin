@@ -329,6 +329,7 @@ PODS:
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.4.0)
+  - JGProgressHUD (2.1)
   - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -344,6 +345,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
+  - JGProgressHUD (~> 2.1)
   - ParticlesLoadingView
   - SwiftQRScanner (from `https://github.com/vinodiOS/SwiftQRScanner`)
 
@@ -366,6 +368,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - JGProgressHUD
     - leveldb-library
     - nanopb
     - ParticlesLoadingView
@@ -398,12 +401,13 @@ SPEC CHECKSUMS:
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   ParticlesLoadingView: 48704281aa7381d7c8c55cbe632f30bbc8d12604
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   SwiftQRScanner: e09dc7b549d0d7301cdca505d483665af8cda58e
 
-PODFILE CHECKSUM: 877b3119c54cc988c63e8f861abd7b7e6f667f25
+PODFILE CHECKSUM: 2aadafaed8d37ef3a976e3471f91f2cc5ad2e56a
 
 COCOAPODS: 1.9.0.beta.3

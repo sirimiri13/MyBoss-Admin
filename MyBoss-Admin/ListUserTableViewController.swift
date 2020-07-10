@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-
+import JGProgressHUD
 struct User{
     var firstName: String
     var lastName: String
@@ -22,17 +22,18 @@ struct User{
 
 class ListUserTableViewController: UITableViewController {
     var listUser: [User] = []
+    let hud = JGProgressHUD(style: .dark)
     let db = Firestore.firestore()
     var addButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setListUser()
-        
-        addButton = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(addButtonAction(_:)))
-      //  self.navigationItem.rightBarButtonItem = self.addButton
-//        navBar.rightBarButtonItem = self.addButton
-//        navBar.title = "STAFF"
-        tableView.reloadData()
+         setListUser()
+               hud.show(in: self.view)
+               DispatchQueue.global(qos: .background).async {
+                   self.hud.dismiss(animated: true)
+                   DispatchQueue.main.async {
+                       self.tableView.reloadData() }
+               }
     }
 
     // MARK: - Table view data source
@@ -55,6 +56,28 @@ class ListUserTableViewController: UITableViewController {
         cell.textLabel?.text = fullName
         return cell
         
+    }
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+           guard section == 0 else { return nil } // Can remove if want button for all sections
+
+           let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 80))
+           footerView.backgroundColor = .systemBlue
+           let myButton = UIButton(type: .custom)
+
+                   myButton.setTitle("ADD STAFF", for: .normal)
+                   myButton.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
+                 //  myButton.tintColor = .systemBlue
+                   myButton.setTitleColor(UIColor.black, for: .normal) //set the color this is may be different for iOS 7
+                   myButton.frame = CGRect(x: 0, y: 0, width: 414, height: 40) //set some large width to ur title
+                   footerView.addSubview(myButton)
+                   return footerView;
+
+       }
+    
+    @objc func addTapped(_ sender: AnyObject){
+        let vc = (storyboard?.instantiateViewController(withIdentifier: "CreateStaffViewController"))! as! CreateStaffViewController
+        self.present(vc,animated: true)
     }
 
     func setListUser(){
@@ -90,10 +113,6 @@ class ListUserTableViewController: UITableViewController {
             
         }
     }
-    
-    @objc func addButtonAction(_ sender: UIBarButtonItem) {
-          print("Test Right button", self.navigationItem.title)
-      }
     
 
 
