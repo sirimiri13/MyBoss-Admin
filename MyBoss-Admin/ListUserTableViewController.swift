@@ -27,15 +27,14 @@ class ListUserTableViewController: UITableViewController {
     var addButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-         setListUser()
-               hud.show(in: self.view)
-               DispatchQueue.global(qos: .background).async {
-                   self.hud.dismiss(animated: true)
-                   DispatchQueue.main.async {
-                       self.tableView.reloadData() }
-               }
+        self.setListUser()
+        self.tableView.reloadData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+       // setListUser()
+        
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,7 +76,8 @@ class ListUserTableViewController: UITableViewController {
     
     @objc func addTapped(_ sender: AnyObject){
         let vc = (storyboard?.instantiateViewController(withIdentifier: "CreateStaffViewController"))! as! CreateStaffViewController
-        self.present(vc,animated: true)
+       // self.present(vc,animated: true)
+        show(vc, sender: nil)
     }
 
     func setListUser(){
@@ -110,6 +110,7 @@ class ListUserTableViewController: UITableViewController {
             vc.email = listUser[indexPath.row].email
             vc.phone = listUser[indexPath.row].phone
             vc.salary = listUser[indexPath.row].salary
+          
             
         }
     }

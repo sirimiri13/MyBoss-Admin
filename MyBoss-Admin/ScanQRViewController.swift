@@ -42,7 +42,23 @@ class ScanQRViewController: UIViewController {
                 let month = formatterMMYY.string(from: today)
                 let timeCheck = formatter3.string(from: today)
                 db.collection("attendance").document(result).getDocument { (snap, err) in
-                self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
+                    var count = 0
+                    self.db.collection("attendance").document(result).collection("days").getDocuments { (snap, err) in
+                        for doc in snap!.documents{
+                            var temp = doc.documentID as String
+                            if temp != month {
+                                count += 1
+                            }
+                        }
+                        var temp = snap?.count
+                        if temp == count {
+                            self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
+                        }
+                        
+                    }
+                    
+                //self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
+                
                  //   self.db.collection("attendance/\(result)'").addDocument(data: [month :[""]])
                     let temp = snap?.data()!["Start"] as! String
                     if (temp == ""){
