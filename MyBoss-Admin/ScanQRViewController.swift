@@ -45,12 +45,12 @@ class ScanQRViewController: UIViewController {
                     var count = 0
                     self.db.collection("attendance").document(result).collection("days").getDocuments { (snap, err) in
                         for doc in snap!.documents{
-                            var temp = doc.documentID as String
+                            let temp = doc.documentID as String
                             if temp != month {
                                 count += 1
                             }
                         }
-                        var temp = snap?.count
+                        let temp = snap?.count
                         if temp == count {
                             self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
                         }
@@ -67,8 +67,10 @@ class ScanQRViewController: UIViewController {
                     else{
                         self.db.collection("attendance").document(result).updateData(["End" : timeCheck])
                         let start = snap?.data()!["Start"] as! String
+                        let tempstart = formatter3.date(from: start)
                         let end = snap?.data()!["Start"] as! String
-                        if (start == end){
+                        let tempend = formatter3.date(from: end)
+                        if (tempstart == tempend){
                           //  self.db.collection("days").document(result).updateData([month : FieldValue.arrayUnion([timeCheck])])
                             self.db.collection("attendance").document(result).collection("days").document(month).updateData(["date" : FieldValue.arrayUnion([timeCheck])])
                             self.db.collection("attendance").document(result).updateData(["End" : "", "Start": ""])

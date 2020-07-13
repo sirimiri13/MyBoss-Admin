@@ -41,7 +41,7 @@ class ListUserTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return listUser.count
@@ -49,6 +49,7 @@ class ListUserTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellUser", for: indexPath)
+    //    cell.backgroundColor = .blue
         let lastName = listUser[indexPath.row].lastName as String
         let firstName = listUser[indexPath.row].firstName as String
         let fullName = firstName + " " + lastName

@@ -12,8 +12,9 @@
 		2D56614A2499E49C00CD683A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5661492499E49C00CD683A /* AppDelegate.swift */; };
 		2D56614C2499E49C00CD683A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56614B2499E49C00CD683A /* SceneDelegate.swift */; };
 		2D5661512499E49C00CD683A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D56614F2499E49C00CD683A /* Main.storyboard */; };
-		2D5661532499E49F00CD683A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661522499E49F00CD683A /* Assets.xcassets */; };
 		2D5661562499E49F00CD683A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661542499E49F00CD683A /* LaunchScreen.storyboard */; };
+		2D65C06C24B971A9007F6127 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D65C06B24B971A9007F6127 /* HomeViewController.swift */; };
+		2D65C06E24B97B28007F6127 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D65C06D24B97B28007F6127 /* Assets.xcassets */; };
 		2D9A0A0524A22C0100AF939F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */; };
 		2D9A0A0724A22DFB00AF939F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */; };
 		2D9A0A0B24A2348F00AF939F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */; };
@@ -33,9 +34,10 @@
 		2D5661492499E49C00CD683A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D56614B2499E49C00CD683A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2D5661502499E49C00CD683A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2D5661522499E49F00CD683A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D5661552499E49F00CD683A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D5661572499E49F00CD683A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D65C06B24B971A9007F6127 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2D65C06D24B97B28007F6127 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../Desktop/Assets.xcassets; sourceTree = "<group>"; };
 		2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -83,14 +85,15 @@
 				2D5661492499E49C00CD683A /* AppDelegate.swift */,
 				2D56614B2499E49C00CD683A /* SceneDelegate.swift */,
 				2D56614F2499E49C00CD683A /* Main.storyboard */,
+				2D65C06B24B971A9007F6127 /* HomeViewController.swift */,
 				2D12D96824AC9455007CDB76 /* CreateStaffViewController.swift */,
 				2D9A0A0E24A25E4500AF939F /* InformationViewController.swift */,
 				2D9A0A0C24A23D5700AF939F /* ListUserTableViewController.swift */,
 				2D12D96A24ACCA6E007CDB76 /* ScanQRViewController.swift */,
-				2D5661522499E49F00CD683A /* Assets.xcassets */,
 				2D5661542499E49F00CD683A /* LaunchScreen.storyboard */,
 				2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */,
 				2D5661572499E49F00CD683A /* Info.plist */,
+				2D65C06D24B97B28007F6127 /* Assets.xcassets */,
 				2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */,
 				BA325ED924B4BA8600B275B6 /* Utilities.swift */,
 			);
@@ -176,7 +179,7 @@
 			files = (
 				2D5661562499E49F00CD683A /* LaunchScreen.storyboard in Resources */,
 				2D9A0A0524A22C0100AF939F /* GoogleService-Info.plist in Resources */,
-				2D5661532499E49F00CD683A /* Assets.xcassets in Resources */,
+				2D65C06E24B97B28007F6127 /* Assets.xcassets in Resources */,
 				2D5661512499E49C00CD683A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,6 +238,7 @@
 				2D12D96B24ACCA6E007CDB76 /* ScanQRViewController.swift in Sources */,
 				2D56614A2499E49C00CD683A /* AppDelegate.swift in Sources */,
 				2D9A0A0F24A25E4500AF939F /* InformationViewController.swift in Sources */,
+				2D65C06C24B971A9007F6127 /* HomeViewController.swift in Sources */,
 				2D56614C2499E49C00CD683A /* SceneDelegate.swift in Sources */,
 				2D9A0A0D24A23D5700AF939F /* ListUserTableViewController.swift in Sources */,
 				BA325EDA24B4BA8600B275B6 /* Utilities.swift in Sources */,
