@@ -27,13 +27,13 @@ class ListUserTableViewController: UITableViewController {
     var addButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setListUser()
+       // self.setListUser()
         self.tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-       // setListUser()
-        
+        listUser.removeAll()
+        setListUser()
     }
     // MARK: - Table view data source
 

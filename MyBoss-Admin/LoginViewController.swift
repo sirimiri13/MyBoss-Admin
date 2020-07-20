@@ -12,12 +12,15 @@ import FirebaseAuth
 import JGProgressHUD
 
 
-
+struct StaffSalary{
+    var email: String
+    var salary: Int
+}
 
 class LoginViewController: UIViewController {
     let db = Firestore.firestore()
     let templateColor = UIColor.white
-    
+    var listStaffSalary : [StaffSalary] = []
     let bgImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +77,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addingUIElements()
         let date = Date()
         let formatter = DateFormatter()
@@ -83,23 +85,36 @@ class LoginViewController: UIViewController {
         let tempToday = formatter.date(from: today)
         let firstDay = formatter.string(from: Date().startOfMonth)
         let tempFirstDay = formatter.date(from: firstDay)
+        var salary = 0
         
         if (tempToday == tempFirstDay){
+      
             let previousMonth = date.getPreviousMonth(date: date)
             db.collection("attendance").getDocuments { (snap, err) in
                 for doc in snap!.documents {
                     let docID = doc.documentID
-                    self.db.collection("attendance").document(docID).collection("days").document(previousMonth).getDocument { (snapDate, err) in
-                        let date = snapDate?.data()!["date"] as! NSArray
-                        var count = date.count
-                        count = count - 1
-                        self.db.collection("user").document(docID).getDocument { (snapSalary, err) in
-                            let basicSalary = snapSalary?.data()!["BasicSalary"] as! NSString
-                            let salaryNum = basicSalary.integerValue
-                            let salary = salaryNum * count
-                            self.db.collection("attendance").document(docID).collection("Salary").document(previousMonth).setData(["Salary" : salary])
+                    self.db.collection("attendance").document(docID).collection("days").getDocuments { (snap, err) in
+                        
+                        print(snap?.count)
+                        if (snap!.count > 0){
+                            self.db.collection("attendance").document(docID).collection("days").document(previousMonth).getDocument { (snapDate, err) in
+                                let date = snapDate?.data()!["date"] as! NSArray
+                                var count = date.count
+                                count = count - 1
+                                self.db.collection("user").document(docID).getDocument { (snapSalary, err) in
+                                    let basicSalary = snapSalary?.data()!["BasicSalary"] as! NSString
+                                    let salaryNum = basicSalary.integerValue
+                                    salary = salaryNum * count
+                                    //let newStaff = StaffSalary(email: docID, salary: salary)
+                                    // self.listStaffSalary.append(newStaff)
+                                    self.db.collection("attendance").document(docID).collection("Salary").document(previousMonth).setData(["Salary" : salary])
+                                    //self.db.collection("Total Salary").document(previousMonth).
+                                }
+                                
+                            }
                         }
                     }
+                    //
                 }
             }
             
@@ -261,41 +276,7 @@ class LoginViewController: UIViewController {
         self.present(alertController, animated: true, completion:{})
     }
     
-//
-//    func getListMonth(){
-//        db.collection("attendance").getDocuments { (snap, err) in
-//            for email in snap!.documents{
-//                let mail = email.documentID
-//                self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
-//                    for month in snapMonth!.documents{
-//                        let monthSalary = month.documentID
-//                        self.listMonth.append(monthSalary)
-//                        //  print(self.listMonth)
-//
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    func getListUser(){
-//        db.collection("attendance").getDocuments { (snap, err) in
-//            for email in snap!.documents{
-//                let mail = email.documentID
-//                self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
-//                    for month in snapMonth!.documents{
-//                        let monthSalary = month.documentID
-//                        self.db.collection("attendance").document(mail).collection("Salary").document(monthSalary).getDocument { (snapSalary, err) in
-//                            let salary = snapSalary?.data()!["Salary"] as! Int
-//                            let newuser = userSalary(month: monthSalary, email: mail, salary: salary)
-//                            self.listUser.append(newuser)
-//                            //  print(self.listUser)
-//                        }
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
+
     
 }
 

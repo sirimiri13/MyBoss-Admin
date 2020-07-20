@@ -89,7 +89,11 @@ class CreateStaffViewController: UIViewController {
                             
                         }
                         else {
-                            
+                            self.firstNameText.text = ""
+                            self.lastNameText.text = ""
+                            self.emailText.text = ""
+                            self.phoneNumberText.text = ""
+                            self.salaryText.text = ""
                             let alert = UIAlertController(title: "Successful", message: "The account is created", preferredStyle: UIAlertController.Style.alert)
                             // add an action (button)
                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{ action in

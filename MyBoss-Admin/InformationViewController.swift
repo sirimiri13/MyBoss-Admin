@@ -82,6 +82,7 @@ class InformationViewController: UIViewController, UIImagePickerControllerDelega
                 let alert = UIAlertController(title: "Reset Password", message: "Please check your email", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alert.addAction(okAction)
+                
                 self.present(alert,animated: false)
             }
          

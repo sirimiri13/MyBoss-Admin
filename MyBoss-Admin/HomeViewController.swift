@@ -27,10 +27,10 @@ struct Salary{
 class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     let formatter = DateFormatter()
     
-    var listSalary = [Salary]()
-    var listMonth = [String]()
-    var listUser = [userSalary]()
-    
+    var listSalary : [Salary] = []
+    var listMonth : [String] = []
+    var listUser : [userSalary] = []
+    var amountOfStaff : Int = 0
     let db = Firestore.firestore()
     let hud = JGProgressHUD(style: .dark)
     var newPw = UITextField()
@@ -41,34 +41,24 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setListSalary()
-//        hud.show(in: self.view)
-//        DispatchQueue.global(qos: .background).async {
-//
-//                   self.setListSalary()
-//            self.hud.dismiss(animated: true)
-//            DispatchQueue.main.async {
-//                    self.tableSalaryView.reloadData()
-//            }
-//
-//        }
-        tableSalaryView.delegate = self
-        tableSalaryView.dataSource = self
         
-
+        // self.setListSalary()
         tableSalaryView.reloadData()
-        formatter.dateFormat = "yyyy/MM/dd"
-       
+        //  formatter.dateFormat = "yyyy/MM/dd"
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
-       // self.tabBarController?.tabBar.isHidden = false
+        
         super.viewWillDisappear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        getData()
+        //  setListSalary()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,7 +66,9 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "SalaryCell", for: indexPath)
+        //    cell.backgroundColor = .blue
         cell.textLabel?.text = listSalary[indexPath.row].month
         let detail = String(listSalary[indexPath.row].totalMoney)
         cell.detailTextLabel?.text = "Total Salary:  \(detail)"
@@ -84,19 +76,80 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
     
     
-    func getListMonth(){
+    func getData(){
+        listUser.removeAll()
         listMonth.removeAll()
+        listSalary.removeAll()
+        
         db.collection("attendance").getDocuments { (snap, err) in
+            
+            
             for email in snap!.documents {
                 let mail = email.documentID
                 self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
+                    if (snap!.count > 0){
+                        self.amountOfStaff += snap!.count
+                    }
                     for month in snapMonth!.documents{
                         let monthSalary = month.documentID
-                        self.listMonth.append(monthSalary)
+                        if (self.listMonth.contains(monthSalary) == false){
+                            self.listMonth.append(monthSalary)
+                            self.tableSalaryView.reloadData()
+                        }
+                        self.db.collection("attendance").document(mail).collection("Salary").document(monthSalary).getDocument { (snapSalary, err) in
+                            let salary = snapSalary?.data()!["Salary"] as! Int
+                            let newuser = userSalary(month: monthSalary, email: mail, salary: salary)
+                            self.listUser.append(newuser)
+                            self.tableSalaryView.reloadData()
+                            self.listUser = self.listUser.sorted(by: { (user1: userSalary, user2: userSalary) -> Bool in
+                                return user1.month < user2.month
+                            })
+                            var i = 0
+                            var count = 0
+                            var temp = Salary(month: self.listUser[0].month, user: [self.listUser[0]], totalMoney: 0)
+                            while ((i < self.listUser.count - 1) && (self.listUser.count == self.amountOfStaff)) {
+                                print(i)
+                                for j in i+1...self.listUser.count-1{
+                                    
+                                    if (self.listUser[i].month == self.listUser[j].month){
+                                        temp.user.append(self.listUser[j])
+                                        count += 1
+                                    }
+                                    else {
+                                        var totalMoney = 0
+                                        for i in temp.user{
+                                            totalMoney += i.salary
+                                        }
+                                        temp.totalMoney = totalMoney
+                                        self.listSalary.append(temp)
+                                        print(self.listSalary)
+                                        self.tableSalaryView.reloadData()
+                                        i = i + count + 1
+                                        temp.month = self.listUser[i].month
+                                        temp.user.removeAll()
+                                        temp.user.append(self.listUser[i])
+                                        count = 0
+                                    }
+                                    if (j == self.listUser.count - 1){
+                                        var totalMoney = 0
+                                        for i in temp.user{
+                                            totalMoney += i.salary
+                                        }
+                                        temp.totalMoney = totalMoney
+                                        i = i + count + 1
+                                        self.listSalary.append(temp)
+                                        print(self.listSalary)
+                                        self.tableSalaryView.reloadData()
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
                     }
                 }
             }
-            print(self.listMonth)
         }
     }
     
@@ -105,29 +158,27 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         db.collection("attendance").getDocuments { (snap, err) in
             for email in snap!.documents{
                 let mail = email.documentID
-                print(email)
                 self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
                     for month in snapMonth!.documents{
                         let monthSalary = month.documentID
-                        print(monthSalary)
                         self.db.collection("attendance").document(mail).collection("Salary").document(monthSalary).getDocument { (snapSalary, err) in
                             let salary = snapSalary?.data()!["Salary"] as! Int
                             let newuser = userSalary(month: monthSalary, email: mail, salary: salary)
                             self.listUser.append(newuser)
+                            self.tableSalaryView.reloadData()
+                            
                         }
                     }
                 }
             }
         }
     }
-
+    
     func setListSalary(){
         listSalary.removeAll()
-        getListUser()
-        getListMonth()
-        listMonth = listMonth.unique()
         var salary = Salary(month: "", user: [],totalMoney: 0)
-        for month in listMonth{
+        //   print(self.listMonth.count)
+        for month in self.listMonth{
             salary.month = month
             for user in listUser{
                 if (user.month == month){
@@ -138,13 +189,14 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 salary.totalMoney += i.salary
             }
             self.listSalary.append(salary)
+            print("---\(listSalary)")
             self.tableSalaryView.reloadData()
             salary.user = []
             salary.totalMoney = 0
+            
         }
-        print(listSalary)
+        
     }
-
     
     @IBAction func managerTapped(_ sender: Any) {
         let alertOption = UIAlertController(title: "Manager", message: "Do you want to Sign Out or Change your password?", preferredStyle: .alert)
@@ -162,19 +214,19 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             self.present(alert,animated: true)
         }
         let changePwAction = UIAlertAction(title: "Change Password", style: .default) { (alertOption) in
-                let alertChangePw = UIAlertController(title: "Change Password", message: "Please enter your edit", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                let okActionChangePw = UIAlertAction(title: "OK", style: .default, handler: self.changePw(alert:))
-                alertChangePw.addTextField { (newPw) in
-                    self.newPw(textFiled: newPw)
-                }
-                alertChangePw.addTextField { (confirmPw) in
-                    self.confirmPw(textFiled: confirmPw)
-                }
-                alertChangePw.addAction(cancelAction)
-                alertChangePw.addAction(okActionChangePw)
-                self.present(alertChangePw,animated: true)
-           
+            let alertChangePw = UIAlertController(title: "Change Password", message: "Please enter your edit", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let okActionChangePw = UIAlertAction(title: "OK", style: .default, handler: self.changePw(alert:))
+            alertChangePw.addTextField { (newPw) in
+                self.newPw(textFiled: newPw)
+            }
+            alertChangePw.addTextField { (confirmPw) in
+                self.confirmPw(textFiled: confirmPw)
+            }
+            alertChangePw.addAction(cancelAction)
+            alertChangePw.addAction(okActionChangePw)
+            self.present(alertChangePw,animated: true)
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertOption.addAction(signOutAction)
