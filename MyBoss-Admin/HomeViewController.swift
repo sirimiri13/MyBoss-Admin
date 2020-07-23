@@ -26,7 +26,6 @@ struct Salary{
 
 class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     let formatter = DateFormatter()
-    
     var listSalary : [Salary] = []
     var listMonth : [String] = []
     var listUser : [userSalary] = []
@@ -41,9 +40,8 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // self.setListSalary()
-        tableSalaryView.reloadData()
+      
+       // self.setListSalary()
         //  formatter.dateFormat = "yyyy/MM/dd"
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,12 +53,18 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        hud.show(in: self.view)
+        DispatchQueue.global(qos: .background)
+        hud.dismiss(animated: true)
+        DispatchQueue.main.async {
+            self.getData()
+            self.tableSalaryView.reloadData()
+        }
         
-        getData()
-        //  setListSalary()
-        
+
     }
     
+  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listSalary.count
     }
@@ -76,22 +80,22 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
     
     
+
+    
     func getData(){
         listUser.removeAll()
         listMonth.removeAll()
         listSalary.removeAll()
-        
         db.collection("attendance").getDocuments { (snap, err) in
-            
-            
+            var countSalary = 0
             for email in snap!.documents {
                 let mail = email.documentID
+                print(mail)
+                
                 self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
-                    if (snap!.count > 0){
-                        self.amountOfStaff += snap!.count
-                    }
                     for month in snapMonth!.documents{
                         let monthSalary = month.documentID
+                        countSalary += 1
                         if (self.listMonth.contains(monthSalary) == false){
                             self.listMonth.append(monthSalary)
                             self.tableSalaryView.reloadData()
@@ -107,7 +111,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                             var i = 0
                             var count = 0
                             var temp = Salary(month: self.listUser[0].month, user: [self.listUser[0]], totalMoney: 0)
-                            while ((i < self.listUser.count - 1) && (self.listUser.count == self.amountOfStaff)) {
+                            while ((i < self.listUser.count - 1) && (self.listUser.count == countSalary)) {
                                 print(i)
                                 for j in i+1...self.listUser.count-1{
                                     
@@ -145,58 +149,11 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                                 }
                             }
                         }
-                        
-                        
                     }
                 }
             }
         }
-    }
-    
-    func getListUser(){
-        listUser.removeAll()
-        db.collection("attendance").getDocuments { (snap, err) in
-            for email in snap!.documents{
-                let mail = email.documentID
-                self.db.collection("attendance").document(mail).collection("Salary").getDocuments { (snapMonth, err) in
-                    for month in snapMonth!.documents{
-                        let monthSalary = month.documentID
-                        self.db.collection("attendance").document(mail).collection("Salary").document(monthSalary).getDocument { (snapSalary, err) in
-                            let salary = snapSalary?.data()!["Salary"] as! Int
-                            let newuser = userSalary(month: monthSalary, email: mail, salary: salary)
-                            self.listUser.append(newuser)
-                            self.tableSalaryView.reloadData()
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func setListSalary(){
-        listSalary.removeAll()
-        var salary = Salary(month: "", user: [],totalMoney: 0)
-        //   print(self.listMonth.count)
-        for month in self.listMonth{
-            salary.month = month
-            for user in listUser{
-                if (user.month == month){
-                    salary.user.append(user)
-                }
-            }
-            for i in salary.user{
-                salary.totalMoney += i.salary
-            }
-            self.listSalary.append(salary)
-            print("---\(listSalary)")
-            self.tableSalaryView.reloadData()
-            salary.user = []
-            salary.totalMoney = 0
-            
-        }
-        
-    }
+  }
     
     @IBAction func managerTapped(_ sender: Any) {
         let alertOption = UIAlertController(title: "Manager", message: "Do you want to Sign Out or Change your password?", preferredStyle: .alert)
@@ -287,11 +244,14 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         }
     }
     
-    
-}
-extension Sequence where Iterator.Element: Hashable {
-    func unique() -> [Iterator.Element] {
-        var seen: Set<Iterator.Element> = []
-        return filter { seen.insert($0).inserted }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToDetail" {
+            let vc = segue.destination as! DetailSalaryViewController
+            guard let indexPath = tableSalaryView.indexPathForSelectedRow else {return}
+            vc.listSalary = listSalary[indexPath.row]
+            
+        }
     }
+    
+
 }

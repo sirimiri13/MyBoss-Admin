@@ -69,7 +69,7 @@ class ListUserTableViewController: UITableViewController {
                    myButton.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
                  //  myButton.tintColor = .systemBlue
                    myButton.setTitleColor(UIColor.black, for: .normal) //set the color this is may be different for iOS 7
-                   myButton.frame = CGRect(x: 0, y: 0, width: 414, height: 40) //set some large width to ur title
+                   myButton.frame = CGRect(x: 0, y: 0, width: 414, height: 35) //set some large width to ur title
                    footerView.addSubview(myButton)
                    return footerView;
 
