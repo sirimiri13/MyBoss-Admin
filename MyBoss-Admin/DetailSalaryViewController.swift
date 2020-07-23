@@ -58,14 +58,15 @@ class DetailSalaryViewController: UIViewController, UITableViewDelegate, UITable
         cell.detailTextLabel?.text =   String(detail)
         return cell
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+           if segue.identifier == "GoToDays" {
+               let vc = segue.destination as! DetailDaysViewController
+               guard let indexPath = tableDetailSalary.indexPathForSelectedRow else {return}
+        //    db.collection("attendance")
+                vc.email = listSalary.user[indexPath.row].email
+                vc.month = listSalary.month
+           }
+       }
+       
 
 }

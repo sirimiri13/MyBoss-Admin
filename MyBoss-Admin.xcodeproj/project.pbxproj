@@ -16,6 +16,7 @@
 		2D5661562499E49F00CD683A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5661542499E49F00CD683A /* LaunchScreen.storyboard */; };
 		2D65C06C24B971A9007F6127 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D65C06B24B971A9007F6127 /* HomeViewController.swift */; };
 		2D65C07224BCA108007F6127 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D65C07124BCA108007F6127 /* Assets.xcassets */; };
+		2D6CB9FB24C99BB000937A47 /* DetailDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6CB9FA24C99BB000937A47 /* DetailDaysViewController.swift */; };
 		2D9A0A0524A22C0100AF939F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */; };
 		2D9A0A0724A22DFB00AF939F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */; };
 		2D9A0A0B24A2348F00AF939F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */; };
@@ -40,6 +41,7 @@
 		2D5661572499E49F00CD683A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D65C06B24B971A9007F6127 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2D65C07124BCA108007F6127 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D6CB9FA24C99BB000937A47 /* DetailDaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDaysViewController.swift; sourceTree = "<group>"; };
 		2D9A0A0424A22C0100AF939F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D9A0A0624A22DFB00AF939F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D9A0A0A24A2348F00AF939F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				2D5661492499E49C00CD683A /* AppDelegate.swift */,
 				2D56614B2499E49C00CD683A /* SceneDelegate.swift */,
 				2D56614F2499E49C00CD683A /* Main.storyboard */,
+				2D6CB9FA24C99BB000937A47 /* DetailDaysViewController.swift */,
 				2D56061B24C58DA800A935E6 /* DetailSalaryViewController.swift */,
 				2D65C06B24B971A9007F6127 /* HomeViewController.swift */,
 				2D12D96824AC9455007CDB76 /* CreateStaffViewController.swift */,
@@ -240,6 +243,7 @@
 				2D12D96924AC9455007CDB76 /* CreateStaffViewController.swift in Sources */,
 				2D56061C24C58DA800A935E6 /* DetailSalaryViewController.swift in Sources */,
 				2D12D96B24ACCA6E007CDB76 /* ScanQRViewController.swift in Sources */,
+				2D6CB9FB24C99BB000937A47 /* DetailDaysViewController.swift in Sources */,
 				2D56614A2499E49C00CD683A /* AppDelegate.swift in Sources */,
 				2D9A0A0F24A25E4500AF939F /* InformationViewController.swift in Sources */,
 				2D65C06C24B971A9007F6127 /* HomeViewController.swift in Sources */,
