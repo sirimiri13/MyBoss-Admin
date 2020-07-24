@@ -18,6 +18,7 @@ class ScanQRViewController: UIViewController {
     var  afterSuccessfullySelected: ((_ item: String?) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.topItem?.title = "SCANNER"
 
     }
 
@@ -26,7 +27,7 @@ class ScanQRViewController: UIViewController {
         let scanner = QRCodeScannerController()
         scanner.delegate = self
         self.present(scanner,animated: true)
-        self.navigationController?.navigationBar.topItem?.title = "SCANNER"
+      //  self.navigationController?.navigationBar.topItem?.title = "SCANNER"
         //     self.navigationController?.show(scanner, sender: self)
     }
     

@@ -40,13 +40,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+         navigationController?.navigationBar.topItem?.title = "HOME"
        // self.setListSalary()
         //  formatter.dateFormat = "yyyy/MM/dd"
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
-        
         super.viewWillDisappear(animated)
     }
     
