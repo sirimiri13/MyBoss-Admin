@@ -111,8 +111,6 @@ class ListUserTableViewController: UITableViewController {
             vc.email = listUser[indexPath.row].email
             vc.phone = listUser[indexPath.row].phone
             vc.salary = listUser[indexPath.row].salary
-          
-            
         }
     }
     
