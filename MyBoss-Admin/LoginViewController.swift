@@ -369,8 +369,13 @@ extension Date {
         let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: self)
         return formatterMMYYYY.string(from: previousMonth!)
     }
-    
-    
+    func getCurrentMonth(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM yyyy"
+        return dateFormatter.string(from: self)
+    }
 }
+    
+    
 
 

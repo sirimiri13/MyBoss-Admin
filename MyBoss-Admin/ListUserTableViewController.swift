@@ -74,6 +74,32 @@ class ListUserTableViewController: UITableViewController {
                    return footerView;
 
        }
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+    {
+        let infoAction = UITableViewRowAction(style: .default, title: "INFORMATION" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "InformationViewController") as! InformationViewController
+            vc.fName = self.listUser[indexPath.row].firstName
+            vc.lName = self.listUser[indexPath.row].lastName
+            vc.profileImage = self.listUser[indexPath.row].profileImage
+            vc.email = self.listUser[indexPath.row].email
+            vc.phone = self.listUser[indexPath.row].phone
+            vc.salary = self.listUser[indexPath.row].salary
+            vc.modalPresentationStyle = .fullScreen
+            self.show(vc, sender: true)
+        })
+        let daysAction = UITableViewRowAction(style: .default, title: "DAYS IN MONTH" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DaysViewController") as! DaysViewController
+            let fName = self.listUser[indexPath.row].firstName
+            let lName = self.listUser[indexPath.row].lastName
+            let fullName = fName + " " + lName
+            vc.fullName = fullName
+            vc.email = self.listUser[indexPath.row].email
+            vc.modalPresentationStyle = .fullScreen
+            self.show(vc, sender: true)
+        })
+        daysAction.backgroundColor = .systemBlue
+        return [infoAction,daysAction]
+    }
     
     @objc func addTapped(_ sender: AnyObject){
         let vc = (storyboard?.instantiateViewController(withIdentifier: "CreateStaffViewController"))! as! CreateStaffViewController
