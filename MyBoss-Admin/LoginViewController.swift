@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     let db = Firestore.firestore()
     let templateColor = UIColor.white
     var listStaffSalary : [StaffSalary] = []
+    var emailTextFied = UITextField()
     let bgImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,38 +89,40 @@ class LoginViewController: UIViewController {
         var salary = 0
         
         if (tempToday == tempFirstDay){
-      
             let previousMonth = date.getPreviousMonth(date: date)
             db.collection("attendance").getDocuments { (snap, err) in
                 for doc in snap!.documents {
                     let docID = doc.documentID
                     self.db.collection("attendance").document(docID).collection("days").getDocuments { (snap, err) in
-                        
                         print(snap?.count)
                         if (snap!.count > 0){
-                            self.db.collection("attendance").document(docID).collection("days").document(previousMonth).getDocument { (snapDate, err) in
-                                let date = snapDate?.data()!["date"] as! NSArray
-                                var count = date.count
-                                count = count - 1
-                                self.db.collection("user").document(docID).getDocument { (snapSalary, err) in
-                                    let basicSalary = snapSalary?.data()!["BasicSalary"] as! NSString
-                                    let salaryNum = basicSalary.integerValue
-                                    salary = salaryNum * count
-                                    //let newStaff = StaffSalary(email: docID, salary: salary)
-                                    // self.listStaffSalary.append(newStaff)
-                                    self.db.collection("attendance").document(docID).collection("Salary").document(previousMonth).setData(["Salary" : salary])
-                                    //self.db.collection("Total Salary").document(previousMonth).
+                            for month in snap!.documents {
+                                if month.documentID == previousMonth {
+                                    self.db.collection("attendance").document(docID).collection("days").document(previousMonth).getDocument { (snapDate, err) in
+                                        let date = snapDate?.data()!["date"] as! NSArray
+                                        var count = date.count
+                                        count = count - 1
+                                        self.db.collection("user").document(docID).getDocument { (snapSalary, err) in
+                                            let basicSalary = snapSalary?.data()!["BasicSalary"] as! NSString
+                                            let salaryNum = basicSalary.integerValue
+                                            salary = salaryNum * count
+                                            //let newStaff = StaffSalary(email: docID, salary: salary)
+                                            // self.listStaffSalary.append(newStaff)
+                                            self.db.collection("attendance").document(docID).collection("Salary").document(previousMonth).setData(["Salary" : salary])
+                                            //self.db.collection("Total Salary").document(previousMonth).
+                                        }
+                                        
+                                    }
                                 }
-                                
                             }
                         }
+                        //
                     }
-                    //
                 }
+                
             }
-            
+            self.HiddenKeyBoard()
         }
-        self.HiddenKeyBoard()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -266,17 +269,30 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func forgotPasswordButtonTapped(button: UIButton) {
-        showAlertVC(title: "Forgot password tapped")
+        let alert = UIAlertController(title: "Forgot Password",message: "Please enter your email",preferredStyle: .alert)
+              
+               let cancelAction = UIAlertAction(title: "Cancel",style: .cancel, handler: nil)
+               let doneAction =  UIAlertAction(title: "Reset Password",style: .default) { (alert) in
+                   Auth.auth().sendPasswordReset(withEmail: self.emailTextFied.text!) { (err) in
+                       let resetAlert = UIAlertController(title: "Reset Password",message: "Please check your email",preferredStyle: .alert)
+                       let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                       resetAlert.addAction(okAction)
+                       self.present(resetAlert,animated: true)
+                   }
+                   
+               }
+               alert.addTextField{ (emailTextFied) in
+                   self.getemailTextFied(textField: emailTextFied)
+                   
+               }
+               alert.addAction(cancelAction)
+               alert.addAction(doneAction)
+               present(alert,animated: true)
     }
-    
-    func showAlertVC(title: String) {
-        let alertController = UIAlertController(title: title, message: "Need to implement code based on user requirements", preferredStyle: UIAlertController.Style.alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion:{})
-    }
-    
-
+    func getemailTextFied(textField: UITextField){
+          emailTextFied = textField
+          emailTextFied.placeholder = "Enter your emaill"
+      }
     
 }
 
