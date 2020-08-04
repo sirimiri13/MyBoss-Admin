@@ -293,6 +293,12 @@ class LoginViewController: UIViewController {
           emailTextFied = textField
           emailTextFied.placeholder = "Enter your emaill"
       }
+      func showAlertVC(title: String) {
+          let alertController = UIAlertController(title: title, message: "Need to implement code based on user requirements", preferredStyle: UIAlertController.Style.alert)
+          let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+          alertController.addAction(cancelAction)
+          self.present(alertController, animated: true, completion:{})
+      }
     
 }
 
