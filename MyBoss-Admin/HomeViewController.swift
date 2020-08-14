@@ -41,8 +41,6 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
          navigationController?.navigationBar.topItem?.title = "HOME"
-       // self.setListSalary()
-        //  formatter.dateFormat = "yyyy/MM/dd"
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
@@ -69,9 +67,8 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        self.formatter.dateFormat = "MM yyyy"
         let cell = tableView.dequeueReusableCell(withIdentifier: "SalaryCell", for: indexPath)
-        //    cell.backgroundColor = .blue
         cell.textLabel?.text = listSalary[indexPath.row].month
         let detail = String(listSalary[indexPath.row].totalMoney)
         cell.detailTextLabel?.text = "Total Salary:  \(detail)"

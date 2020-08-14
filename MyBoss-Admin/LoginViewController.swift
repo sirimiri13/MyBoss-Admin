@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
         let tempFirstDay = formatter.date(from: firstDay)
         var salary = 0
         
-        if (tempToday == tempFirstDay){
+        if (true){
             let previousMonth = date.getPreviousMonth(date: date)
             db.collection("attendance").getDocuments { (snap, err) in
                 for doc in snap!.documents {
