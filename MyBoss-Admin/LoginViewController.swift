@@ -265,7 +265,7 @@ class LoginViewController: UIViewController {
     @objc private func signUpButtonTapped(button: UIButton) {
         let vc = (storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")) as! SignUpViewController
         vc.modalPresentationStyle = .popover
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     @objc private func forgotPasswordButtonTapped(button: UIButton) {
@@ -294,7 +294,7 @@ class LoginViewController: UIViewController {
           emailTextFied.placeholder = "Enter your emaill"
       }
       func showAlertVC(title: String) {
-          let alertController = UIAlertController(title: title, message: "Need to implement code based on user requirements", preferredStyle: UIAlertController.Style.alert)
+          let alertController = UIAlertController(title: "MESSAGE", message: title, preferredStyle: UIAlertController.Style.alert)
           let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
           alertController.addAction(cancelAction)
           self.present(alertController, animated: true, completion:{})

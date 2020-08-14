@@ -112,9 +112,7 @@ class InformationViewController: UIViewController, UIImagePickerControllerDelega
            
     }
     
-    @IBAction func disableTapped(_ sender: Any) {
-        
-    }
+  
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
            let storageRef = Storage.storage().reference().child("profile/\(email)")
