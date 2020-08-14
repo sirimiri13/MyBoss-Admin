@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     let bgImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "loginAdmin.jpg")
+        imageView.image = UIImage(named: "adminbg.jpg")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -42,6 +42,8 @@ class LoginViewController: UIViewController {
         bgView.backgroundColor = UIColor(displayP3Red: 9.0/255.0, green: 33.0/255.0, blue: 47.0/255.0, alpha: 1.0).withAlphaComponent(0.7)
         return bgView
     }()
+  
+
     
     let textFieldView1 : TextFieldView = {
         let textFieldView = TextFieldView()
@@ -153,7 +155,7 @@ class LoginViewController: UIViewController {
         bgView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0).isActive = true
         bgView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0).isActive = true
         bgView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0).isActive = true
-        
+    
         
         // Email textfield and icon
         view.insertSubview(textFieldView1, aboveSubview: bgView)
