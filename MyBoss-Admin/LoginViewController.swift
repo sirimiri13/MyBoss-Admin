@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
         let firstDay = formatter.string(from: Date().startOfMonth)
         let tempFirstDay = formatter.date(from: firstDay)
         var salary = 0
-        
+        // kiêm tra tính lương
         if (true){
             let previousMonth = date.getPreviousMonth(date: date)
             db.collection("attendance").getDocuments { (snap, err) in

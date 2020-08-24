@@ -61,13 +61,14 @@ class CreateStaffViewController: UIViewController {
         let salary = salaryText.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         hud.show(in: self.view)
         DispatchQueue.global(qos: .background).async {
-            
+            // tạo acc
             Auth.auth().createUser(withEmail: email, password: phone!) { (res, err) in
                 
                 if (err != nil){
                     self.showError(message: err!.localizedDescription)
                 }
                 else {
+                    // up link QR
                     let storageRef = Storage.storage().reference().child("QR/\(email)")
                     guard let qrImage = self.generateQRCode(from: email)?.jpegData(compressionQuality: 1) else {return}
                     let metaData = StorageMetadata()
@@ -78,9 +79,9 @@ class CreateStaffViewController: UIViewController {
                             guard url != nil else {return}
                         }
                     }
+                    // Up thông tin user lên fb
                     let db = Firestore.firestore()
                     db.collection("attendance").document(email).setData(["Start" : "","End": ""])
-                    //      db.collection("attendance").document(email).collection("days").document("06 2020").setData(["date": [""]])
                     db.collection("user").document(email).setData(["QR":"gs://myboss-27d17.appspot.com/QR/\(email)", "FirstName" : fName as Any,"LastName": lName,"Email":email,"Phone": phone,"BasicSalary": salary,"avatar": "gs://myboss-27d17.appspot.com/profile/profile.png"]) { (err) in
                         
                         
@@ -115,6 +116,8 @@ class CreateStaffViewController: UIViewController {
         }
         
     }
+    
+    // tạo QRCode
     func generateQRCode(from string: String) -> UIImage? {
         let data = string.data(using: String.Encoding.ascii)
         
@@ -136,6 +139,7 @@ class CreateStaffViewController: UIViewController {
     }
     
 }
+// ẩn bàn phím
 extension CreateStaffViewController{
     func HiddenKeyBoard(){
         

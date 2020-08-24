@@ -21,7 +21,7 @@ class ScanQRViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "SCANNER"
 
     }
-
+// scan
     @IBAction func ScanTapped(_ sender: Any) {
         //QRCode scanner without Camera switch and Torch
         let scanner = QRCodeScannerController()
@@ -33,7 +33,7 @@ class ScanQRViewController: UIViewController {
     
     }
     extension ScanQRViewController: QRScannerCodeDelegate {
-           // let date = Calendar.current.
+         // lấy thời gian scan up lên fb
             func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
                 let today = Date()
                 let formatter3 = DateFormatter()
@@ -58,9 +58,7 @@ class ScanQRViewController: UIViewController {
                         
                     }
                     
-                //self.db.collection("attendance").document(result).collection("days").document(month).setData(["date": [""]])
-                
-                 //   self.db.collection("attendance/\(result)'").addDocument(data: [month :[""]])
+            
                     let temp = snap?.data()!["Start"] as! String
                     if (temp == ""){
                         self.db.collection("attendance").document(result).updateData(["Start" : timeCheck])
@@ -71,6 +69,7 @@ class ScanQRViewController: UIViewController {
                         let tempstart = formatter3.date(from: start)
                         let end = snap?.data()!["Start"] as! String
                         let tempend = formatter3.date(from: end)
+                        // kiem tra lượt scan có trong ngày hay k? nếu có thì thêm ngày vào danh sách ngày điểm danh trong tháng. Không thì bỏ start, end ->start (không tính ngày quét 1 lần)
                         if (tempstart == tempend){
                           //  self.db.collection("days").document(result).updateData([month : FieldValue.arrayUnion([timeCheck])])
                             self.db.collection("attendance").document(result).collection("days").document(month).updateData(["date" : FieldValue.arrayUnion([timeCheck])])

@@ -146,14 +146,6 @@ class SignUpViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped(button:)), for: .touchUpInside)
     }
       
-//    func setElement(){
-//       // Utilities.isPasswordValid(pwTextField.text!)
-//        Utilities.styleTextField(emailTextField)
-//        Utilities.styleTextField(pwTextField)
-//        Utilities.styleTextField(confirmPwTextField)
-//        Utilities.styleFilledButton(signUpButton)
-//        errMess.alpha = 0
-//}
     
     @objc private func signUpButtonTapped(button: UIButton) {
         let email = textFieldView1.textField.text!.trimmingCharacters(in: .whitespacesAndNewlines)

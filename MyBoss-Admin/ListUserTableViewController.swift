@@ -74,6 +74,8 @@ class ListUserTableViewController: UITableViewController {
                    return footerView;
 
        }
+    
+    // set 2 button info và day
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         let infoAction = UITableViewRowAction(style: .default, title: "INFORMATION" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
@@ -101,12 +103,15 @@ class ListUserTableViewController: UITableViewController {
         return [infoAction,daysAction]
     }
     
+    // tạo tàikhoarn mới
     @objc func addTapped(_ sender: AnyObject){
         let vc = (storyboard?.instantiateViewController(withIdentifier: "CreateStaffViewController"))! as! CreateStaffViewController
        // self.present(vc,animated: true)
         show(vc, sender: nil)
     }
 
+    
+    // lấy danh sách nhân viên từ fb về 
     func setListUser(){
         navigationController?.navigationBar.topItem?.title = "STAFF"
         navigationController?.navigationItem.rightBarButtonItem = self.addButton

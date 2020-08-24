@@ -29,7 +29,7 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         getData()
     }
-    
+    // lấy ngày làm việc trong tháng hiên tại
     func getData(){
         let month = date.getCurrentMonth(date: date)
         print(month)

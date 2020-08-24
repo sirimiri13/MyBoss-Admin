@@ -77,7 +77,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     
 
-    
+    // lấy tổng theo tháng
     func getData(){
         listUser.removeAll()
         listMonth.removeAll()
@@ -150,6 +150,8 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             }
         }
   }
+    
+    
     
     @IBAction func managerTapped(_ sender: Any) {
         let alertOption = UIAlertController(title: "Manager", message: "Do you want to Sign Out or Change your password?", preferredStyle: .alert)

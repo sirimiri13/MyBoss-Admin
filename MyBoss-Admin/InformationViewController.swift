@@ -39,7 +39,7 @@ class InformationViewController: UIViewController, UIImagePickerControllerDelega
 
         // Do any additional setup after loading the view.
     }
-    
+    // lấy thông tin nhân viên được chọn set vào view
     func setData(){
         firstNameLabel.text = fName
         lastNameLabel.text = lName
@@ -113,7 +113,7 @@ class InformationViewController: UIViewController, UIImagePickerControllerDelega
     }
     
   
-    
+    // picker image để đổi avt
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
            let storageRef = Storage.storage().reference().child("profile/\(email)")
            guard let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else{

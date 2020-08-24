@@ -23,7 +23,6 @@ class DetailSalaryViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         hud.show(in: self.view)
         DispatchQueue.global(qos: .background)
-      
         hud.dismiss(animated: true)
         DispatchQueue.main.async {
             self.getData()
@@ -32,10 +31,7 @@ class DetailSalaryViewController: UIViewController, UITableViewDelegate, UITable
         
         print(listSalary)
     }
-    override func viewWillAppear(_ animated: Bool) {
-       // getData()
-    }
-
+   
     func getData(){
         monthLabel.text = listSalary.month
     }
@@ -44,20 +40,26 @@ class DetailSalaryViewController: UIViewController, UITableViewDelegate, UITable
         return listSalary.user.count
     }
     
+    
+    // chi tiết nhân viên làm và số tiền nhận được trong tháng đc chọn
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableDetailSalary.dequeueReusableCell(withIdentifier: "DetailSalaryCell", for: indexPath)
         db.collection("user").document(listSalary.user[indexPath.row].email).getDocument { (snap, err) in
                        let fName = snap?.data()!["FirstName"] as! String
                        let lName = snap?.data()!["LastName"] as! String
                        let fullName = fName + " " + lName
+            // tên nhân viên
             cell.textLabel?.text = fullName
             
         }
        // cell.textLabel?.text = listSalary.user[indexPath.row].email
+        // lương
         let detail = listSalary.user[indexPath.row].salary
         cell.detailTextLabel?.text =   String(detail)
         return cell
     }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if segue.identifier == "GoToDays" {
                let vc = segue.destination as! DetailDaysViewController

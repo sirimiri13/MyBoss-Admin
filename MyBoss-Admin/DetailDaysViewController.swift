@@ -33,6 +33,8 @@ class DetailDaysViewController: UIViewController, UITableViewDelegate, UITableVi
         // Do any additional setup after loading the view.
     }
     
+    // lấy ngày làm việc trong tháng được chọn của nhân viên đc chọn
+    
     func getData(){
         db.collection("attendance").document(email).collection("days").document(month).getDocument { (snap, err) in
             let date = snap?.data()!["date"] as! NSArray
@@ -46,16 +48,5 @@ class DetailDaysViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
